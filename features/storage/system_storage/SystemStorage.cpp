@@ -18,6 +18,10 @@
 #include "FATFileSystem.h"
 #include "LittleFileSystem.h"
 
+#if COMPONENT_SMIF
+#include "Psoc6BlockDevice.h"
+#endif
+
 #if COMPONENT_SPIF
 #include "SPIFBlockDevice.h"
 #endif
@@ -52,7 +56,14 @@ static inline uint32_t align_up(uint32_t val, uint32_t size)
 
 MBED_WEAK BlockDevice *BlockDevice::get_default_instance()
 {
-#if COMPONENT_SPIF
+
+#if COMPONENT_SMIF
+
+     static Psoc6BlockDevice default_bd;
+
+     return &default_bd;
+
+#elif COMPONENT_SPIF
 
     static SPIFBlockDevice default_bd(
         MBED_CONF_SPIF_DRIVER_SPI_MOSI,
