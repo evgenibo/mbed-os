@@ -76,7 +76,7 @@ extern "C" {
 /* -------------------------------------- Typedefs ----------------------------------- */
 
 typedef uint32_t psa_signal_t;
-typedef int32_t psa_error_t;
+typedef int psa_error_t;
 typedef int32_t psa_handle_t;
 typedef psa_error_t error_t;
 
